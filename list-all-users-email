@@ -1,0 +1,15 @@
+# List all users with an email address, export to .CSV
+
+# Import Active Directory module
+Import-Module ActiveDirectory
+
+# Set the path for the CSV file
+$outputFile = "C:\Users\ExportedUsers.csv"
+
+# Get the list of users and their email addresses
+$users = Get-ADUser -Filter * -Property EmailAddress | Select-Object Name, EmailAddress
+
+# Export the list to a CSV file
+$users | Export-Csv -Path $outputFile -NoTypeInformation
+
+Write-Output "User list with email addresses exported to $outputFile"
